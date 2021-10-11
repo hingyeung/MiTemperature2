@@ -50,7 +50,7 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           context: ./
-          file: ./Dockerfile
+          file: ./docker/Dockerfile
           platforms: linux/arm/v6,amd64
           push: true
           tags: ${{ secrets.DOCKER_HUB_USERNAME }}/mi-temperature-2:${{steps.extract_branch.outputs.sanitised_branch_name}}
