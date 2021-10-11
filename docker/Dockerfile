@@ -21,6 +21,6 @@ RUN mkdir -p /app/config
 
 #RUN setcap cap_net_raw,cap_net_admin+eip $(eval readlink -f `which python3`)
 # RUN service dbus start
-ENTRYPOINT service dbus start && python3 LYWSD03MMC.py --atc -r -b 100 --skipidentical 50 -deb --devicelistfile /app/config/sensors.ini --mqttconfigfile /app/config/mqtt.conf
+ENTRYPOINT python3 LYWSD03MMC.py --atc -r -b 100 --skipidentical 50 -deb --devicelistfile /app/config/sensors.ini --mqttconfigfile /app/config/mqtt.conf
 
 # docker buildx build --tag mi-temperature-2 --platform linux/arm/v6 --file ./docker/Dockerfile .
