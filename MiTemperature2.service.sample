@@ -1,0 +1,18 @@
+[Unit]
+Description=MiTemperature2 LYWSD03MMC
+After=network.target
+
+[Service]
+# point $WORKDIR to where your mqtt.conf and sensors.ini files are
+# replace $DOCKERHUB_USER with your dockerhub username
+ExecStart=docker run --mount type=bind,source=$WORKDIR,target=/app/config,readonly --log-opt max-size=10m --log-opt max-file=3 --log-opt mode=non-blocking --name MiTemperature2 --rm --cap-add=NET_ADMIN --cap-add=NET_RAW --net=host -i ${DOCKERHUB_USER}/mi-temperature-2:master
+ExecStop=docker stop MiTemperature2
+WorkingDirectory=$WORKDIR
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=MiTemperature2
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target
